@@ -1,12 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const auth = require('../middleware/auth');
-const AuthController = require('../controller/AuthController');
+const UserController = require('../controller/UserController');
 const { check } = require('express-validator');
 
-
 //@router       POST api/auth/
-//desc          Auth & Login
+//desc          Register new user
 //access        Public
 router.post(
   '/',
@@ -15,13 +13,9 @@ router.post(
     check('password', 'Password must be 6 or more charater').isLength({
       min: 6,
     }),
+    check('username', 'Field must be valid email').exists(),
   ],
-  AuthController.login
+  UserController.register
 );
-
-//@router       POST api/auth/
-//desc          Get logged in user
-//access        Private
-router.get('/', auth, AuthController.getUser);
 
 module.exports = router;
