@@ -1,10 +1,10 @@
-import axios from 'axios';
-import { createContext, useReducer } from 'react';
-import TodoReducer from './TodoReducer';
-import { EP_ADD_TODO, EP_DELETE_TODO, EP_GET_TODOS } from '../endpoints';
-import { AT_GET_TODOS, AT_SET_LOADING } from '../types';
-import { config } from '../../utils/HttpConfig';
-
+import axios from "axios";
+import { createContext, useReducer } from "react";
+import TodoReducer from "./TodoReducer";
+import { EP_ADD_TODO, EP_DELETE_TODO, EP_GET_TODOS } from "../endpoints";
+import { AT_GET_TODOS, AT_SET_LOADING } from "../types";
+import { config } from "../../utils/HttpConfig";
+import setAuthToken from "../../utils/setAuthToken";
 export const TodoContext = createContext();
 
 const TodoContextProvider = ({ children }) => {
@@ -16,10 +16,10 @@ const TodoContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(TodoReducer, initialState);
 
   //Get Todo Items
-  const getTodoItems = async (userId) => {
+  const getTodoItems = async () => {
     try {
       setLoading();
-      const todos = await axios.get(EP_GET_TODOS, { params: { userId } });
+      const todos = await axios.get(EP_GET_TODOS);
       dispatch({ type: AT_GET_TODOS, payload: todos.data });
     } catch (err) {
       console.error(err);
@@ -29,10 +29,10 @@ const TodoContextProvider = ({ children }) => {
   //Add Todo Item
   const addTodoItem = async (todoData) => {
     try {
-      const payload = {
-        todoData,
-      };
+      const payload = todoData;
+
       const addTodo = await axios.post(EP_ADD_TODO, payload, config);
+
       if (addTodo) {
         getTodoItems(todoData.userId);
       }

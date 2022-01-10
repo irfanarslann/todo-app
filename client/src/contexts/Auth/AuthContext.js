@@ -1,4 +1,4 @@
-import { createContext, useReducer } from 'react';
+import { createContext, useEffect, useReducer } from 'react';
 import axios from 'axios';
 import AuthReducer from './AuthReducer';
 import setAuthToken from '../../utils/setAuthToken';
@@ -90,6 +90,13 @@ const AuthContextProvider = ({ children }) => {
   const clearError = () => {
     setTimeout(() => dispatch({ type: AT_CLEAR_AUTH_ERRORS }), 5000);
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      loadUser();
+    }
+  }, []);
+
 
   return (
     <AuthContext.Provider

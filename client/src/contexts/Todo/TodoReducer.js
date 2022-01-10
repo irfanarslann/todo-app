@@ -1,6 +1,6 @@
 import { AT_SET_LOADING, AT_GET_TODOS } from '../types';
 
-const TodoReducer = (action, state) => {
+const TodoReducer = (state, action) => {
   switch (action.type) {
     case AT_GET_TODOS:
       return {
