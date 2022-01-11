@@ -31,5 +31,6 @@
 - Mongoose
 - bcrypt
 - config
+- Axios
 
 ##### Projeyi çalıştırmak için console'dan = _npm run dev_ yazınız
