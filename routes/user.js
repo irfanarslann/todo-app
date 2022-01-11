@@ -3,7 +3,7 @@ const router = express.Router();
 const UserController = require('../controller/UserController');
 const { check } = require('express-validator');
 
-//@router       POST api/auth/
+//@router       POST api/user/
 //desc          Register new user
 //access        Public
 router.post(
