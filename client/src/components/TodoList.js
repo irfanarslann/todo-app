@@ -22,7 +22,6 @@ const TodoList = () => {
       {!loading && todos && (
         <>
           {todos.length > 0 && <h2>To Do List</h2>}
-
           {todos.map((todo) => {
             return <TodoItem key={uuid()} todoItem={todo} />;
           })}
