@@ -1,5 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Montserrat:wght@400;500;600;900&family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");
-$gradientColor: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+//Variables
+$loginBgColor: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+$dark: #374151;
+$darker: #1f2937;
+$darkest: #111827;
+$grey: #6b7280;
+$pink: #ec4899;
+$purple: #8b5cf6;
+$light: #eee;
+
 * {
   margin: 0;
   padding: 0;
@@ -39,11 +48,11 @@ $gradientColor: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
   align-items: center;
   font-family: "Poppins", sans-serif;
   min-height: 100vh;
-  background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+  background: $loginBgColor;
   .main {
     width: 350px;
     height: 500px;
-    background: red;
+    background: $pink;
     overflow: hidden;
     background: url("https://doc-08-2c-docs.googleusercontent.com/docs/securesc/68c90smiglihng9534mvqmq1946dmis5/fo0picsp1nhiucmc0l25s29respgpr4j/1631524275000/03522360960922298374/03522360960922298374/1Sx0jhdpEpnNIydS4rnN4kHSJtU1EyWka?e=view&authuser=0&nonce=gcrocepgbb17m&user=03522360960922298374&hash=tfhgbs86ka6divo3llbvp93mg4csvb38")
       no-repeat center/ cover;
@@ -71,7 +80,7 @@ $gradientColor: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
       height: 100%;
     }
     label {
-      color: #fff;
+      color: $light;
       font-size: 2.3em;
       justify-content: center;
       display: flex;
@@ -83,7 +92,7 @@ $gradientColor: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
     input {
       width: 60%;
       height: 20px;
-      background: #e0dede;
+      background: $light;
       justify-content: center;
       display: flex;
       margin: 20px auto;
@@ -98,7 +107,7 @@ $gradientColor: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
       margin: 10px auto;
       justify-content: center;
       display: block;
-      color: #fff;
+      color: $light;
       background: #573b8a;
       font-size: 1em;
       font-weight: bold;
@@ -115,7 +124,7 @@ $gradientColor: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
 
     .login {
       height: 460px;
-      background: #eee;
+      background: $light;
       border-radius: 60% / 10%;
       transform: translateY(-180px);
       transition: 0.8s ease-in-out;
@@ -129,99 +138,155 @@ $gradientColor: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
 
 .home-main {
   width: 100%;
-  display: flex;
-  height: 100vh;
+  min-height: 100vh;
   justify-content: center;
+  display: flex;
+  flex-direction: column;
+  background-color: $dark;
+  input,
+  button {
+    appearance: none;
+    border: none;
+    outline: none;
+    background: none;
+  }
 
-  background: linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(9, 9, 121, 1) 45%,
-    rgba(0, 255, 248, 1) 100%
-  );
-
-  .content-main {
-    width: 50%;
-    background: white;
-    height: 700px;
-    margin-top: 100px;
-    border-radius: 10px;
-    box-shadow: 0px 2px 14px 2px #ffffff;
-    .title {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 20px;
-      padding-top: 20px;
-      span {
-        cursor: pointer;
-        i {
-          font-size: 30px;
-          transition: 0.4s;
-        }
-
-        &:hover {
-          i {
-            font-size: 40px;
-          }
-        }
-      }
+  header {
+    padding: 2rem 1rem;
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: $grey;
+      margin-bottom: 1rem;
     }
-    .form {
+
+    .new-todo-form {
       display: flex;
-      flex-direction: column;
-      padding: 10px;
-      align-items: center;
-      input {
-        width: 80%;
-        padding: 10px;
-        margin-bottom: 20px;
+      .new-todo-input {
+        flex: 1 1 0%;
+        background-color: $darker;
+        padding: 1rem;
+        border-radius: 1rem;
+        margin-right: 1rem;
+        color: $light;
+        font-size: 1.25rem;
+
         &::placeholder {
-          text-align: center;
+          color: $grey;
         }
       }
+      .new-todo-submit {
+        color: $pink;
+        font-size: 1.25rem;
+        font-weight: 700;
+        background-image: linear-gradient(to right, $pink, $purple);
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        cursor: pointer;
+        transition: 0.4s;
 
-      .buttons {
-        display: flex;
+        &:hover {
+          opacity: 0.8;
+        }
+        &:active {
+          opacity: 0.6;
+        }
       }
     }
+  }
+  main {
+    flex: 1 1 0%;
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
 
-    .todolist {
-      margin-top: 20px;
-      padding: 0 40px;
-      .todo-item-container {
-        width: 100%;
-        cursor: pointer;
+    .todo-list {
+      padding: 1rem;
+
+      h2 {
+        font-size: 1.5rem;
+        font-weight: 300;
+        color: $grey;
+        margin-bottom: 1rem;
+      }
+      h3 {
+        text-align: center;
+        margin-top: 20px;
+        background-color: $dark;
+        font-size: 50px;
+        padding: 10px;
+        text-transform: capitalize;
+        color: $pink;
+        font-size: 1.25rem;
+        font-weight: 700;
+        background-image: linear-gradient(to right, $pink, $purple);
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .todo-item {
         display: flex;
-        flex-direction: column;
+        justify-content: space-between;
+        background-color: $darkest;
+        padding: 1rem;
+        border-radius: 1rem;
+        margin-bottom: 1rem;
 
-        padding: 8px;
-        word-wrap: break-word;
-        .left {
-          word-wrap: break-word;
+        .content {
+          flex: 1 1 0%;
 
-          h1 {
-            font-size: 16px;
-            font-weight: 500;
+          .text {
+            color: $light;
+            font-size: 1.125rem;
+            width: 100%;
+            display: block;
+            transition: 0.4s;
+            &:not(:read-only) {
+              color: $pink;
+            }
+          }
+        }
+
+        .actions {
+          display: flex;
+          margin: 0 -0.5rem;
+          button {
+            cursor: pointer;
+            margin: 0 0.5rem;
+            font-size: 1.125rem;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 4px;
+            transition: 0.4s;
+            &:hover {
+              opacity: 0.8;
+            }
+            &:active {
+              opacity: 0.6;
+            }
           }
-          p {
-            margin-bottom: 6px;
-            font-size: 14px;
+
+          .edit {
+            background-image: linear-gradient(to right, $pink, $purple);
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
           }
-        }
-        .right {
-          h6 {
-            font-weight: 100;
-            margin-bottom: 5px;
+          .delete {
+            color: crimson;
           }
-        }
-        &:hover {
-          background: rgb(235, 234, 229);
         }
       }
+    }
+  }
+  .logout {
+    i {
+      color: $light;
+      font-size: 50px;
+      padding-left: 10px;
+      padding-bottom: 10px;
+      cursor: pointer;
     }
   }
 }

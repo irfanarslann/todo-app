@@ -86,7 +86,26 @@ const Login = (props) => {
               onChange={(e) => setPassword(e.target.value)}
             />
             <button>Login</button>
-            {error}
+            {error && (
+              <div
+                style={{
+                  textAlign: "center",
+                  marginTop: "20px",
+                  backgroundColor: "#F2DEDE",
+                  borderColor: "#ffeeba",
+                  borderRadius: "5px",
+                  fontSize: "15px",
+                  padding: "10px",
+                  textTransform: "capitalize",
+                  marginBottom: "25px",
+                  fontWeight: "400",
+                  color: "#843534",
+                }}
+              >
+                <strong>Warning! </strong>
+                {error}
+              </div>
+            )}
           </form>
         </div>
       </div>

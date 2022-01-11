@@ -64,6 +64,7 @@ const AuthContextProvider = ({ children }) => {
     }
   };
 
+  //Register 
   const register = async (email, password, username) => {
     try {
       const payload = {

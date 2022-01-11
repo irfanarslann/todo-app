@@ -1,15 +1,13 @@
-import { useContext, useEffect, useState } from "react";
+import TodoItem from "./TodoItem";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../contexts/Auth/AuthContext";
 import { TodoContext } from "../contexts/Todo/TodoContext";
-import Button from "./Button";
-import Form from "./Form";
 import Loading from "./Loading";
-import TodoItem from "./TodoItem";
-
+import { v4 as uuid } from "uuid";
 const TodoList = () => {
   const { todos, loading, getTodoItems } = useContext(TodoContext);
   const { user } = useContext(AuthContext);
-  const [todoModal, setTodoModal] = useState(true);
+
   useEffect(() => {
     if (user) {
       if (!todos) {
@@ -17,39 +15,21 @@ const TodoList = () => {
       }
     }
   }, [user, todos]);
-
   return (
-    <div className={`todolist`}>
+    <section className="todo-list">
       {loading && <Loading />}
-      {!loading &&
-        todos &&
-        todos.map((todo) => {
-          return (
-            <>
-              <TodoItem todoItem={todo} />
-            </>
-          );
-        })}
-      {todos && todos.length === 0 && (
-        <h3
-          style={{
-            textAlign: "center",
-            marginTop: "20px",
-            backgroundColor: "#F8D7DA",
-            borderColor: "#ffeeba",
-            borderRadius: "5px",
-            fontSize: "15px",
-            padding: "10px",
-            textTransform: "capitalize",
-            marginBottom: "25px",
-            fontWeight: "400",
-            color: "#881C24",
-          }}
-        >
-          There is no todo item yet!
-        </h3>
+
+      {!loading && todos && (
+        <>
+          {todos.length > 0 && <h2>To Do List</h2>}
+
+          {todos.map((todo) => {
+            return <TodoItem key={uuid()} todoItem={todo} />;
+          })}
+        </>
       )}
-    </div>
+      {todos && todos.length === 0 && <h3>There is no to do item yet!</h3>}
+    </section>
   );
 };
 

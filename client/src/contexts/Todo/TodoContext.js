@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createContext, useReducer } from "react";
 import TodoReducer from "./TodoReducer";
-import { EP_ADD_TODO, EP_DELETE_TODO, EP_GET_TODOS } from "../endpoints";
+import { EP_TODOS } from "../endpoints";
 import { AT_GET_TODOS, AT_SET_LOADING } from "../types";
 import { config } from "../../utils/HttpConfig";
 import setAuthToken from "../../utils/setAuthToken";
@@ -19,7 +19,7 @@ const TodoContextProvider = ({ children }) => {
   const getTodoItems = async () => {
     try {
       setLoading();
-      const todos = await axios.get(EP_GET_TODOS);
+      const todos = await axios.get(EP_TODOS);
       dispatch({ type: AT_GET_TODOS, payload: todos.data });
     } catch (err) {
       console.error(err);
@@ -31,7 +31,7 @@ const TodoContextProvider = ({ children }) => {
     try {
       const payload = todoData;
 
-      const addTodo = await axios.post(EP_ADD_TODO, payload, config);
+      const addTodo = await axios.post(EP_TODOS, payload, config);
 
       if (addTodo) {
         getTodoItems(todoData.userId);
@@ -42,13 +42,25 @@ const TodoContextProvider = ({ children }) => {
   };
 
   //Delete Todo Item
-  const deleteTodoItem = async (todoItemId, userId) => {
+  const deleteTodoItem = async (todoId) => {
     try {
-      const deleteItem = await axios.delete(EP_DELETE_TODO, {
-        params: { todoItemId },
+      const deleteItem = await axios.delete(EP_TODOS, {
+        params: { todoId },
       });
       if (deleteItem) {
-        getTodoItems(userId);
+        getTodoItems();
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  //Update Todo Item
+  const updateTodoItem = async (todoId, content) => {
+    console.log(todoId);
+    try {
+      const updateItem = await axios.put(EP_TODOS, { todoId, content });
+      if (updateItem) {
+        getTodoItems();
       }
     } catch (err) {
       console.error(err);
@@ -68,6 +80,7 @@ const TodoContextProvider = ({ children }) => {
         getTodoItems,
         addTodoItem,
         deleteTodoItem,
+        updateTodoItem,
       }}
     >
       {children}
